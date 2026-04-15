@@ -1,0 +1,39 @@
+name: KeepWhiteSpace
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Install and test
+        run: |
+          cd KeepWhiteSpace
+          npm install
+          npm test
+
+  push-to-epitech:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to Epitech
+        run: |
+          git remote add epitech git@github.com:EpitechWebAcademiePromo2027/W-DOP-200-MLN-2-1-jeux_videops-2.git
+          git push epitech HEAD:main
+        env:
+          GIT_SSH_COMMAND: "ssh -i ${{ secrets.DEPLOY_KEY }} -o StrictHostKeyChecking=no"
