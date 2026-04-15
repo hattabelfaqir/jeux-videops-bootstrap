@@ -1,4 +1,4 @@
-name: KeepWhiteSpace
+name: TwoShipsPassingInTheNight
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
 
       - name: Install and test
         run: |
-          cd KeepWhiteSpace
+          cd TwoShipsPassingInTheNight
           npm install
           npm test
 
