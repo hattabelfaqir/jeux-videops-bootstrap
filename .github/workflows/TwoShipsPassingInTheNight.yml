@@ -1,4 +1,3 @@
-# test push 2026-04-15
 name: TwoShipsPassingInTheNight
 
 on:
@@ -8,38 +7,51 @@ on:
     branches: ["main"]
 
 jobs:
-  test:
+  secret-scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          node-version: 20.x
+          fetch-depth: 0
 
-      - name: Install and test
+      - name: Scan secrets avec Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  test:
+    needs: secret-scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ca clone sur la machine du runner GitHub.
+        uses: actions/checkout@v4
+
+      - name: Installe Node.js sur la machine du runner GitHub.
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Cava dans le dosier ca installe est ca fais les tests.
         run: |
           cd TwoShipsPassingInTheNight
           npm install
           npm test
 
-  push-to-epitech:
-    runs-on: ubuntu-latest
+  push_to_mirror:
     needs: test
-    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Setup SSH key
+      - name: Push vers le miroir Epitech
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git remote add mirror https://x-access-token:${{ secrets.MIRROR_TOKEN }}@github.com/EpitechWebAcademiePromo2027/W-DOP-200-MLN-2-1-jeux_videops-2.git
+          git push mirror main
 
-      - name: Push to Epitech
-        run: |
-          git remote add epitech git@github.com:EpitechWebAcademiePromo2027/W-DOP-200-MLN-2-1-jeux_videops-2.git
-          GIT_SSH_COMMAND="ssh -i ~/.ssh/deploy_key" git push epitech HEAD:main
+
+
+
+
+
+   
