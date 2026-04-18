@@ -30,7 +30,7 @@ jobs:
       - name: Installe Node.js sur la machine du runner GitHub.
         uses: actions/setup-node@v4
         with:
-          node-version: ltd/*
+          node-version: lts/*
 
       - name: Cava dans le dosier ca installe est ca fais les tests.
         run: |
