@@ -49,7 +49,7 @@ jobs:
 
       - name: Push vers le miroir Epitech
         env:
-          MIRROR_URL: https://x-access-token:${{ secrets.MIRROR_TOKEN }}@github.com/EpitechWebAcademiePromo2027/W-DOP-200-MLN-2-1-jeux_videops-2.git
+          MIRROR_URL: https://x-access-token:${{ secrets.MIRROR_TOKEN }}@github.com/EpitechWebAcademiePromo202/W-DOP-200-MLN-2-1-jeux_videops-2.git
         run: |
           mkdir /tmp/m
           cp -r SpaceWord /tmp/m/
