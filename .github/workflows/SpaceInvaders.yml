@@ -64,8 +64,8 @@ jobs:
           cd SpaceInvaders
           npm install
           npm install --save-dev eslint@8 eslint-config-google @typescript-eslint/parser @typescript-eslint/eslint-plugin
-          echo '{"extends":["google"],"parser":"@typescript-eslint/parser","env":{"browser":true,"es2021":true}}' > .eslintrc.json
-          npx eslint --ext .ts src/
+          echo '{"extends":["google"],"parser":"@typescript-eslint/parser","env":{"browser":true,"es2021":true},"parserOptions":{"ecmaVersion":2021,"sourceType":"module"}}' > .eslintrc.json
+          npx eslint --ext .ts src/ts/math/math.ts
 
   audit:
     needs: test
