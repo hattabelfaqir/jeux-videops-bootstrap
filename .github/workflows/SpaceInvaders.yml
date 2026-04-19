@@ -53,9 +53,9 @@ jobs:
         env:
           MIRROR_URL: https://x-access-token:${{ secrets.MIRROR_TOKEN }}@github.com/EpitechWebAcademiePromo2027/W-DOP-200-MLN-2-1-jeux_videops-2.git
         run: |
-          mkdir /tmp/m
-          cp -r SpaceInvaders /tmp/m/
-          cd /tmp/m/
+          TMPDIR=$(mktemp -d)
+          cp -r SpaceInvaders "$TMPDIR/"
+          cd "$TMPDIR"
           git init
           git config user.email "ci@gitube.com"
           git config user.name "CI"
