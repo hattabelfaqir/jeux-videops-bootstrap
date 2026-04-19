@@ -61,7 +61,11 @@ jobs:
 
       - name: Linter ESLint Google Style
         run: |
-          echo "No dedicated source file to lint for KeepWhiteSpace"
+          cd KeepWhiteSpace
+          npm install
+          npm install --save-dev eslint@8 eslint-config-google
+          echo '{"extends":["google"],"env":{"browser":true,"es2021":true},"parserOptions":{"ecmaVersion":2021,"sourceType":"module"}}' > .eslintrc.json
+          npx eslint --ext .js math.js
 
   audit:
     needs: test
