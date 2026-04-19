@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "https://razh.github.io/js13k-2021",
   "main": "index.js",
-"scripts": {
+  "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
     "test": "node --experimental-vm-modules node_modules/.bin/jest"
-},
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/razh/js13k-2021.git"
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/razh/js13k-2021#readme",
   "devDependencies": {
+    "@playwright/test": "1.59.1",
     "del": "6.0.0",
     "escape-string-regexp": "5.0.0",
     "eslint": "7.32.0",
@@ -56,7 +57,10 @@
   "keywords": [],
   "type": "module",
   "jest": {
-    "transform": {}
+    "transform": {},
+    "testPathIgnorePatterns": [
+      ".*\\.spec\\.js"
+    ]
   },
   "dependencies": {
     "acorn": "7.4.1",
@@ -601,12 +605,12 @@
     "stream-exhaust": "1.0.2",
     "stream-shift": "1.0.1",
     "strict-uri-encode": "1.1.0",
+    "string_decoder": "1.1.1",
     "string-length": "4.0.2",
     "string-width": "4.2.3",
     "string-width-cjs": "4.2.3",
     "string.prototype.trimend": "1.0.4",
     "string.prototype.trimstart": "1.0.4",
-    "string_decoder": "1.1.1",
     "strip-ansi": "6.0.0",
     "strip-ansi-cjs": "6.0.1",
     "strip-bom": "4.0.0",
