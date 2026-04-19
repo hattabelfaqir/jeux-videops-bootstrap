@@ -16,6 +16,7 @@ describe('randFloatSpread', () => {
   });
 })
 
+
 describe('mapLinear', () => {
   test('mapLinear(1,2,3,4,5) returns 3', () => {
     expect(mapLinear(1, 2, 3, 4, 5)).toBe(3);
@@ -25,6 +26,7 @@ describe('mapLinear', () => {
     expect(mapLinear(1, 20, 3, 40, 5)).toBeCloseTo(0.882352941176471);
   });
 })
+
 
 describe('lerp', () => {
   test('lerp(1,3,20) returns 41', () => {

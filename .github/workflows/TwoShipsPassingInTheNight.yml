@@ -19,6 +19,7 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
 
   test:
     needs: secret-scan
@@ -47,12 +48,12 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Push vers le miroir Epitech
+      - name: Push vers le mirror Epitech
         env: 
           MIRROR_URL: https://x-access-token:${{ secrets.MIRROR_TOKEN }}@github.com/EpitechWebAcademiePromo2027/W-DOP-200-MLN-2-1-jeux_videops-2.git
         run: |
           mkdir /tmp/m
-          cp -r SpaceWord /tmp/m/
+          cp -r TwoShipsPassingInTheNight /tmp/m/
           cd /tmp/m/
           git init
           git config user.email "ci@gitube.com"
@@ -63,7 +64,7 @@ jobs:
           git push --force miroir HEAD:main
 
   notify_discord:
-    name: "notify discord"
+    name: notify discord
     runs-on: ubuntu-latest
     needs: [secret-scan, test, push_to_mirror]
     if: always()

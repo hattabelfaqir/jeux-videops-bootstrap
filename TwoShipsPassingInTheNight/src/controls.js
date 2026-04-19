@@ -1,4 +1,7 @@
-import { clamp } from './math.js';
+import { clamp } from './math.js'
+
+
+
 import { quat_create, quat_multiply, quat_setFromEuler } from './quat.js';
 import { vec3_create } from './vec3.js';
 
