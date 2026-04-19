@@ -2,9 +2,10 @@ name: TwoShipsPassingInTheNight
 
 on:
   push:
-    branches: ["main"]
+    branches: ["*"]
   pull_request:
     branches: ["main"]
+  workflow_dispatch:
 
 jobs:
   secret-scan:
@@ -37,7 +38,48 @@ jobs:
         run: |
           cd TwoShipsPassingInTheNight
           npm install
-          npm test
+          if npm test; then
+            echo "::notice::✅ Tous les tests passent pour TwoShipsPassingInTheNight"
+            echo "## ✅ Tests réussis" >> $GITHUB_STEP_SUMMARY
+            echo "Tous les tests unitaires de TwoShipsPassingInTheNight sont passés." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "::error::❌ Des tests ont échoué pour TwoShipsPassingInTheNight"
+            echo "## ❌ Tests échoués" >> $GITHUB_STEP_SUMMARY
+            echo "Des tests unitaires de TwoShipsPassingInTheNight ont échoué." >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
+  lint:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Linter ESLint Google Style
+        run: |
+          cd TwoShipsPassingInTheNight
+          npm install
+          npm install --save-dev eslint eslint-config-google
+          npx eslint --no-eslintrc -c '{"extends":["google"],"env":{"browser":true,"es2021":true}}' --ext .js src/
+
+  audit:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Audit des dependances npm
+        run: |
+          cd TwoShipsPassingInTheNight
+          npm audit --audit-level=high
 
   push_to_mirror:
     needs: test
@@ -66,7 +108,7 @@ jobs:
   notify_discord:
     name: notify discord
     runs-on: ubuntu-latest
-    needs: [secret-scan, test, push_to_mirror]
+    needs: [secret-scan, test, lint, audit, push_to_mirror]
     if: always()
     steps:
       - name: "virification discord notification"
@@ -89,5 +131,3 @@ jobs:
                  }]
                }" \
                ${{ secrets.DISCORD_WEBHOOK_URL }}
-
-
