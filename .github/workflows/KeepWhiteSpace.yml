@@ -63,7 +63,7 @@ jobs:
         run: |
           cd KeepWhiteSpace
           npm install
-          npm install --save-dev eslint eslint-config-google
+          npm install --save-dev eslint@8 eslint-config-google
           npx eslint --no-eslintrc -c '{"extends":["google"],"env":{"browser":true,"es2021":true}}' --ext .js .
 
   audit:
