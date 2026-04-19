@@ -23,6 +23,14 @@ describe('clamp', () => {
   test('clamp(1, 10, -12) returns 1', () => {
     expect(clamp(1, 10, -12)).toBe(1);
   });
+
+  test('clamp(1, 10, 10) returns 10', () => {
+    expect(clamp(1, 10, 10)).toBe(10);
+  });
+
+  test('clamp(1, 10, 1) returns 1', () => {
+    expect(clamp(1, 10, 1)).toBe(1);
+  });
 });
 
 describe('lerp', () => {
@@ -32,6 +40,10 @@ describe('lerp', () => {
 
   test('lerp(1, 10, -12) returns -107', () => {
     expect(lerp(1, 10, -12)).toBe(-107);
+  });
+
+  test('lerp(0, 10, 0.5) returns 5', () => {
+    expect(lerp(0, 10, 0.5)).toBe(5);
   });
 });
 
@@ -60,6 +72,10 @@ describe('normalize', () => {
 describe('dot', () => {
   test('dot({ x: 5, y: 50 }, { x: 10, y: 100 }) returns 5050', () => {
     expect(dot({ x: 5, y: 50 }, { x: 10, y: 100 })).toBe(5050);
+  });
+
+  test('dot({ x: 0, y: 0 }, { x: 5, y: 50 }) returns 0', () => {
+    expect(dot({ x: 0, y: 0 }, { x: 5, y: 50 })).toBe(0);
   });
 });
 
