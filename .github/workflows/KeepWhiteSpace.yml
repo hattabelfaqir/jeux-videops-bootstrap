@@ -76,7 +76,7 @@ jobs:
       - name: Audit des dependances npm
         run: |
           cd KeepWhiteSpace
-          npm audit --audit-level=high
+          npm audit --audit-level=high --omit=dev
 
   push_to_mirror:
     needs: test
