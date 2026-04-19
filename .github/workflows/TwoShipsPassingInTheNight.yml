@@ -61,7 +61,7 @@ jobs:
 
       - name: Linter ESLint Google Style
         run: |
-          echo "No dedicated source file to lint for TwoShipsPassingInTheNight"
+          echo "Aucun fichier source dédié à linter pour TwoShipsPassingInTheNight"
 
   audit:
     needs: test
@@ -75,7 +75,7 @@ jobs:
 
       - name: Audit des dependances npm
         run: |
-          echo "Audit skipped for TwoShipsPassingInTheNight - build tools listed as dependencies"
+          echo "Audit ignoré pour TwoShipsPassingInTheNight - outils de build listés en dépendances"
 
   push_to_mirror:
     needs: test
