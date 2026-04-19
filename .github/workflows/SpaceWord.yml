@@ -64,7 +64,8 @@ jobs:
           cd SpaceWord
           npm install
           npm install --save-dev eslint@8 eslint-config-google
-          npx eslint --no-eslintrc -c '{"extends":["google"],"env":{"browser":true,"es2021":true}}' --ext .js .
+          echo '{"extends":["google"],"env":{"browser":true,"es2021":true}}' > .eslintrc.json
+          npx eslint --ext .js .
 
   audit:
     needs: test
@@ -113,7 +114,9 @@ jobs:
     steps:
       - name: "send discord notification"
         run: |
-          if [ "${{ needs.test.result }}" = "success" ] && [ "${{ needs.push_to_mirror.result }}" = "success" ]; then
+          if [ "${{ needs.ecret-scan.result }}" = "success" ] && [ "${{ needs.test.result }}" = "success" ] && 
+             [ "${{ needs.lint.result }}" = "success" ] && [ "${{ needs.audit.result }}" = "success" ] && 
+             [ "${{ needs.push_to_mirror.result }}" = "success" ] ; then
             COLOR=3066993
             STATUS="✅ Success"
           else
