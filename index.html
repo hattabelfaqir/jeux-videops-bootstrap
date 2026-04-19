@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeux Videops</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #0d0d0d;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 40px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #00e5ff;
+    }
+
+    .games {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    a.btn {
+      display: block;
+      padding: 20px 40px;
+      background-color: #1a1a2e;
+      color: #00e5ff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      border: 2px solid #00e5ff;
+      border-radius: 8px;
+      transition: background-color 0.2s, color 0.2s;
+      text-align: center;
+      min-width: 220px;
+    }
+
+    a.btn:hover {
+      background-color: #00e5ff;
+      color: #0d0d0d;
+    }
+  </style>
+</head>
+<body>
+  <h1>Jeux Videops</h1>
+  <div class="games">
+    <a class="btn" href="./SpaceWord/index.html">Space Word</a>
+    <a class="btn" href="./KeepWhiteSpace/index.html">Keep White Space</a>
+    <a class="btn" href="./SpaceInvaders/index.html">Space Invaders</a>
+    <a class="btn" href="./TwoShipsPassingInTheNight/index.html">Two Ships Passing In The Night</a>
+  </div>
+</body>
+</html>
