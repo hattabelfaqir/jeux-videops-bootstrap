@@ -13,6 +13,14 @@ describe('getRandomInt', () => {
   test('getRandomInt(42, 42) returns 42', () => {
     expect(getRandomInt(42, 42)).toBe(42);
   });
+
+  test('getRandomInt(0, 0) returns 0', () => {
+    expect(getRandomInt(0, 0)).toBe(0);
+  });
+
+  test('getRandomInt(-10, -10) returns -10', () => {
+    expect(getRandomInt(-10, -10)).toBe(-10);
+  });
 });
 
 describe('rectIntersect', () => {
@@ -22,6 +30,10 @@ describe('rectIntersect', () => {
 
   test('rectIntersect(1,1,5,2,4,1,1,2) returns true', () => {
     expect(rectIntersect(1, 1, 5, 2, 4, 1, 1, 2)).toBe(true);
+  });
+
+  test('rectIntersect (0, 0, 10, 10, 5, 5, 10, 10) returns true', () => {
+    expect(rectIntersect(0, 0, 10, 10, 5, 5, 10, 10)).toBe(true);
   });
 });
 
@@ -33,6 +45,10 @@ describe('circleIntersect', () => {
   test('circleIntersect(3,2,1,3,-2,4) returns true', () => {
     expect(circleIntersect(3, 2, 1, 3, -2, 4)).toBe(true);
   });
+
+  test('circleIntersect(0,0,5, 10,0,5) returns true', () => {
+    expect(circleIntersect(0, 0, 5, 10, 0, 5)).toBe(true);
+  });
 });
 
 describe('timeToString', () => {
@@ -42,5 +58,9 @@ describe('timeToString', () => {
 
   test('timeToString("toto") returns "NaN:NaN:NaN"', () => {
     expect(timeToString('toto')).toBe('NaN:NaN:NaN');
+  });
+
+  test('timeToString(0) returns "00:00:00"', () => {
+    expect(timeToString(0)).toBe('00:00:00');
   });
 });
