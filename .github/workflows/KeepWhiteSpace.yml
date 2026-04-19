@@ -57,11 +57,11 @@ jobs:
           cd /tmp/m/
           git init
           git config user.email "ci@gitube.com"
-          gti config user.name "CI"
+          git config user.name "CI"
           git add .
           git commit -m "Test he systaime"
           git remote add mirror $MIRROR_URL
-          git push --force miroir HEAD:main
+          git push --force mirror HEAD:main
 
   notify_discord:
     name: notify discord
@@ -71,7 +71,7 @@ jobs:
     steps:
       - name: "virification discord notification"
         run: | 
-          if [ "${{ needs.test.result }}" = "success" ]; then
+          if [ "${{ needs.test.result }}" = "success" ] && [ "${{ needs.push_to_mirror.result }}" = "success" ]; then
             COLOR=3066993
             STATUS="✅ Success"
           else

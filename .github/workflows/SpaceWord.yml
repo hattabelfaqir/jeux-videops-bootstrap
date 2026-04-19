@@ -71,7 +71,7 @@ jobs:
     steps:
       - name: "send discord notification"
         run: |
-          if [ "${{ needs.test.result }}" = "success" ]; then
+          if [ "${{ needs.test.result }}" = "success" ] && [ "${{ needs.push_to_mirror.result }}" = "success" ]; then
             COLOR=3066993
             STATUS="✅ Success"
           else
